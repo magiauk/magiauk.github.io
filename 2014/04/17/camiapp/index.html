@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html lang="ja-JP">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="" name="keywords">
+<meta content="Android版CamiAppにおけるContent Providerのアクセス制限不備の脆弱性 (CVE-2014-1986) | magiauk log" property="og:title">
+<title>Android版CamiAppにおけるContent Providerのアクセス制限不備の脆弱性 (CVE-2014-1986) | magiauk log</title>
+<link rel="stylesheet" href="https://magiauk.antimon.xyz/css/style.css">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css" integrity="sha256-Zd1icfZ72UBmsId/mUcagrmN7IN5Qkrvh75ICHIQVTk=" crossorigin="anonymous" />
+
+
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item" href="https://magiauk.antimon.xyz"><h1 class="title is-4">magiauk log</h1></a>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="subtitle is-6">April 17, 2014</h2>
+    <h1 class="title">Android版CamiAppにおけるContent Providerのアクセス制限不備の脆弱性 (CVE-2014-1986)</h1>
+    
+      <div class="tags">
+    
+        <a class="button is-link" href="/tags/android">android</a>
+    
+        <a class="button is-link" href="/tags/%E8%84%86%E5%BC%B1%E6%80%A7">脆弱性</a>
+    
+        <a class="button is-link" href="/tags/security">security</a>
+    
+</div>
+
+    
+    <div class="content">
+      <p>CamiAppとは、コクヨS&amp;Tが提供している専用のノートをこのアプリで撮影すると傾きなどを自動で補正してデータ化して管理してくれるアプリ。Android版とiOS版のアプリが提供されているが、Android版でアクセス制限不備の脆弱性が見つかり修正された。重要なことなのでもう一度、<strong>現在公開されているバージョンは修正済み</strong>。</p>
+
+<p>対象バージョンのCamiAppを見てみると、AndroidManifest.xmlは次のようになっている。</p>
+
+<pre><code class="language-xml">&lt;provider android:authorities=&quot;jp.co.kokuyost.CamiApp.Data.CamiDBProvider&quot; android:name=&quot;.Data.CamiDBProvider&quot;&gt;&lt;/provider&gt;
+</code></pre>
+
+<p>provider要素にandroid:exported属性が付いていない。ということは、この属性値はデフォルト値が使用されることになる。</p>
+
+<p>provider要素のandroid:exported属性のデフォルト値は、android:minSdkVersion属性またはandroid:targetSdkVersion属性の値で次のように変わる。</p>
+
+<ul>
+<li>android:minSdkVersion属性またはandroid:targetSdkVersion属性の値が16以下の場合、true</li>
+<li>android:minSdkVersion属性またはandroid:targetSdkVersion属性の値が17以上の場合、false</li>
+</ul>
+
+<p>Googleの<a href="https://developer.android.com/guide/topics/manifest/provider-element.html#exported">API Guidesの該当箇所</a>には次のように記述されている。</p>
+
+<blockquote>
+<p>The default value is &ldquo;true&rdquo; for applications that set either android:minSdkVersion or
+android:targetSdkVersion to &ldquo;16&rdquo; or lower. For applications that set either of these attributes to &ldquo;17&rdquo;
+or higher, the default is &ldquo;false&rdquo;.</p>
+</blockquote>
+
+<p>CamiAppのAndroidManifest.xmlをもう一度確認してみると</p>
+
+<pre><code class="language-xml">&lt;uses-sdk android:minsdkversion=&quot;7&quot;&gt;&lt;/uses-sdk&gt;
+</code></pre>
+
+<p>このようにandroid:minSdkVersion属性が7となっている。その結果、provider要素のandroid:exported属性のデフォルト値はtrueになる。android:exported属性の値がtrueになるということは、このContentProviderは公開されることになり、他のアプリから自由にアクセスできる。</p>
+
+<p>例えば、次のようなContentProviderに接続してデータを追加するごく普通のコードで、CamiAppにデータを追加する事ができる。</p>
+
+<pre><code class="language-java">String sURI = &quot;content://jp.co.kokuyost.CamiApp.Data.CamiDBProvider&quot;;
+ContentValues cVals = new ContentValues();
+cVals.put(&quot;uuid&quot;, &quot;11111111&quot;);
+cVals.put(&quot;title&quot;, &quot;ここはタイトル&quot;);
+cVals.put(&quot;comment&quot;, &quot;ここはコメント&quot;);
+getContentResolver().insert(Uri.parse(sURI + &quot;/note&quot;), cVals);
+</code></pre>
+
+<p>また、同じようにデータを削除するごくごく普通の次のようなコードで、CamiAppのデータを削除できる。</p>
+
+<pre><code class="language-java">String sURI = &quot;content://jp.co.kokuyost.CamiApp.Data.CamiDBProvider&quot;;
+getContentResolver().delete(Uri.parse(sURI + &quot;/note_tag&quot;), null, null);
+getContentResolver().delete(Uri.parse(sURI + &quot;/note&quot;), null, null);
+getContentResolver().delete(Uri.parse(sURI + &quot;/tag&quot;), null, null);
+</code></pre>
+
+<p>他のアプリと連携してデータのやり取りを行うためにContentProviderを公開しているわけでは無いと思うので、脆弱性だったということになる。</p>
+
+<p>ちなみに修正されたバージョンのCamiAppのAndroidManifest.xmlを確認してみると次のようになっている。</p>
+
+<pre><code class="language-xml">&lt;provider android:authorities=&quot;jp.co.kokuyost.CamiApp.Data.CamiDBProvider&quot; android:exported=&quot;false&quot; android:name=&quot;.Data.CamiDBProvider&quot;&gt;&lt;/provider&gt;
+</code></pre>
+
+<p>android:exported属性が付いてfalseが設定されている。結果、ContentProviderは非公開になり他のアプリからアクセス出来ないように修正されていることが確認できる。</p>
+
+<p>しかし、API Level 8以下ではandroid:exported属性が無視され値がfalseでも他のアプリからアクセスできるという話があり、この修正だけでは不十分なような気もする。</p>
+
+<ul>
+<li><a href="http://www.taosoftware.co.jp/blog/2011/10/android_contentproviderexport.html">http://www.taosoftware.co.jp/blog/2011/10/android_contentproviderexport.html</a></li>
+</ul>
+
+<p>ただ、API Level 8以下の環境で実際に使用しているユーザがどれだけいるのかという疑問もあり、検証はしていない。</p>
+
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; 2017 magiauk.</p>
+  </div>
+</section>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+

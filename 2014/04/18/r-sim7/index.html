@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="ja-JP">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="" name="keywords">
+<meta content="下駄R-SIM7&#43;を使用したiPhone 5で発生する圏外病の解決方法 | magiauk log" property="og:title">
+<title>下駄R-SIM7&#43;を使用したiPhone 5で発生する圏外病の解決方法 | magiauk log</title>
+<link rel="stylesheet" href="https://magiauk.antimon.xyz/css/style.css">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css" integrity="sha256-Zd1icfZ72UBmsId/mUcagrmN7IN5Qkrvh75ICHIQVTk=" crossorigin="anonymous" />
+
+
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item" href="https://magiauk.antimon.xyz"><h1 class="title is-4">magiauk log</h1></a>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="subtitle is-6">April 18, 2014</h2>
+    <h1 class="title">下駄R-SIM7&#43;を使用したiPhone 5で発生する圏外病の解決方法</h1>
+    
+      <div class="tags">
+    
+        <a class="button is-link" href="/tags/iphone">iphone</a>
+    
+        <a class="button is-link" href="/tags/jailbreak">jailbreak</a>
+    
+</div>
+
+    
+    <div class="content">
+      <p>R-SIM7+はいわゆる下駄とよばれるもので、SIMロックがかかっている端末でこの下駄を使用すると、他のキャリアのSIMを使用して通信することができる。</p>
+
+<p>SoftBankのiPhone 5はSIMロックがかかっているのでdocomoのSIMを挿してもdocomoのネットワークは使用できない。しかし、下駄を使用することでSoftBankのiPhone 5でもdocomoのSIMを挿してdocomoのネットワークを使用して通信することができるようになる。</p>
+
+<p><img src="/images/rsim7_iphone5.jpg" alt="iPhone 5の写真" /></p>
+
+<p>下駄は様々なメーカーが販売しているがR-SIM7+と呼ばれるものを使用している。基本的に、説明書通りに設定すれば使用できるのだが、たまに圏外になりそれ以降あれこれしても電波を掴まなくなり、最終的にSIMの抜き差しを繰り返したりして電波を掴むまで試行錯誤する必要が出てくる。いわゆる圏外病とよばれる症状になる。</p>
+
+<p>ということで、その解決方法はiPhone 5をjailbreakしてCarrier Bundleをいじるというもの。これにより圏外病の発生をなくすことができる。</p>
+
+<p>SoftBankのbundleはiOS7が動作しているiPhone 5の場合 /System/Library/Carrier Bundles/iPhone/Softbank_jp.bundle にある。</p>
+
+<p><img src="/images/rsim7_directory.png" alt="ディレクトリのスクリーンショット" /></p>
+
+<p>このディレクトリの中にある次のファイル</p>
+
+<ul>
+<li>overrides_N41_N42.plist</li>
+<li>overrides_N41_N42.pri</li>
+</ul>
+
+<p>これらを削除する。これらファイルはLTEのためのものであり、これらを削除することで設定が書き換わることがなくなるので圏外病が発生しなくなる(LTEに必要なものを削除するのでLTEは使用できなくなる)。</p>
+
+<p>また、このディレクトリにあるcarrier.plistを使用するキャリアに合わせて適宜変更しておくと便利。apnsの項目にAPNの情報を追加したり、type-maskを変更しておくとテザリングが使用できるようになったりする。</p>
+
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; 2017 magiauk.</p>
+  </div>
+</section>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+
