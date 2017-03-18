@@ -3,8 +3,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta content="" name="keywords">
-<meta content="antimon" property="og:title">
-<title>antimon</title>
+<meta content="Security | antimon" property="og:title">
+<title>Security | antimon</title>
 <link rel="stylesheet" href="https://antimon.xyz/css/style.css">
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
@@ -266,48 +266,6 @@
     </article>
     
     <article>
-      <h2 class="subtitle is-6">April 18, 2014</h2>
-      <h1 class="title"><a href="https://antimon.xyz/2014/04/18/r-sim7/">下駄R-SIM7&#43;を使用したiPhone 5で発生する圏外病の解決方法</a></h1>
-      
-        <div class="tags">
-    
-        <a class="button is-link" href="/tags/iphone">iphone</a>
-    
-        <a class="button is-link" href="/tags/jailbreak">jailbreak</a>
-    
-</div>
-
-      
-      <div class="content">
-        <p>R-SIM7+はいわゆる下駄とよばれるもので、SIMロックがかかっている端末でこの下駄を使用すると、他のキャリアのSIMを使用して通信することができる。</p>
-
-<p>SoftBankのiPhone 5はSIMロックがかかっているのでdocomoのSIMを挿してもdocomoのネットワークは使用できない。しかし、下駄を使用することでSoftBankのiPhone 5でもdocomoのSIMを挿してdocomoのネットワークを使用して通信することができるようになる。</p>
-
-<p><img src="/images/rsim7_iphone5.jpg" alt="iPhone 5の写真" /></p>
-
-<p>下駄は様々なメーカーが販売しているがR-SIM7+と呼ばれるものを使用している。基本的に、説明書通りに設定すれば使用できるのだが、たまに圏外になりそれ以降あれこれしても電波を掴まなくなり、最終的にSIMの抜き差しを繰り返したりして電波を掴むまで試行錯誤する必要が出てくる。いわゆる圏外病とよばれる症状になる。</p>
-
-<p>ということで、その解決方法はiPhone 5をjailbreakしてCarrier Bundleをいじるというもの。これにより圏外病の発生をなくすことができる。</p>
-
-<p>SoftBankのbundleはiOS7が動作しているiPhone 5の場合 /System/Library/Carrier Bundles/iPhone/Softbank_jp.bundle にある。</p>
-
-<p><img src="/images/rsim7_directory.png" alt="ディレクトリのスクリーンショット" /></p>
-
-<p>このディレクトリの中にある次のファイル</p>
-
-<ul>
-<li>overrides_N41_N42.plist</li>
-<li>overrides_N41_N42.pri</li>
-</ul>
-
-<p>これらを削除する。これらファイルはLTEのためのものであり、これらを削除することで設定が書き換わることがなくなるので圏外病が発生しなくなる(LTEに必要なものを削除するのでLTEは使用できなくなる)。</p>
-
-<p>また、このディレクトリにあるcarrier.plistを使用するキャリアに合わせて適宜変更しておくと便利。apnsの項目にAPNの情報を追加したり、type-maskを変更しておくとテザリングが使用できるようになったりする。</p>
-
-      </div>
-    </article>
-    
-    <article>
       <h2 class="subtitle is-6">April 17, 2014</h2>
       <h1 class="title"><a href="https://antimon.xyz/2014/04/17/camiapp/">Android版CamiAppにおけるContent Providerのアクセス制限不備の脆弱性 (CVE-2014-1986)</a></h1>
       
@@ -531,6 +489,5 @@ fa70: c7 25 cc b0 c9 d3 b9 ed 0d ce 51 77 74 25 40 a5  .%........Qwt%@.
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/languages/dockerfile.min.js"></script>
 
 <script>hljs.initHighlightingOnLoad();</script>
-
 
 

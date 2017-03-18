@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Iphone on antimon</title>
+    <link>https://antimon.xyz/tags/iphone/index.xml</link>
+    <description>Recent content in Iphone on antimon</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-JP</language>
+    <copyright>&amp;copy; 2014-2017 magiauk.</copyright>
+    <atom:link href="https://antimon.xyz/tags/iphone/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>下駄R-SIM7&#43;を使用したiPhone 5で発生する圏外病の解決方法</title>
+      <link>https://antimon.xyz/2014/04/18/r-sim7/</link>
+      <pubDate>Fri, 18 Apr 2014 09:49:00 +0900</pubDate>
+      
+      <guid>https://antimon.xyz/2014/04/18/r-sim7/</guid>
+      <description>&lt;p&gt;R-SIM7+はいわゆる下駄とよばれるもので、SIMロックがかかっている端末でこの下駄を使用すると、他のキャリアのSIMを使用して通信することができる。&lt;/p&gt;
+
+&lt;p&gt;SoftBankのiPhone 5はSIMロックがかかっているのでdocomoのSIMを挿してもdocomoのネットワークは使用できない。しかし、下駄を使用することでSoftBankのiPhone 5でもdocomoのSIMを挿してdocomoのネットワークを使用して通信することができるようになる。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://antimon.xyz/images/rsim7_iphone5.jpg&#34; alt=&#34;iPhone 5の写真&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;下駄は様々なメーカーが販売しているがR-SIM7+と呼ばれるものを使用している。基本的に、説明書通りに設定すれば使用できるのだが、たまに圏外になりそれ以降あれこれしても電波を掴まなくなり、最終的にSIMの抜き差しを繰り返したりして電波を掴むまで試行錯誤する必要が出てくる。いわゆる圏外病とよばれる症状になる。&lt;/p&gt;
+
+&lt;p&gt;ということで、その解決方法はiPhone 5をjailbreakしてCarrier Bundleをいじるというもの。これにより圏外病の発生をなくすことができる。&lt;/p&gt;
+
+&lt;p&gt;SoftBankのbundleはiOS7が動作しているiPhone 5の場合 /System/Library/Carrier Bundles/iPhone/Softbank_jp.bundle にある。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://antimon.xyz/images/rsim7_directory.png&#34; alt=&#34;ディレクトリのスクリーンショット&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;このディレクトリの中にある次のファイル&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;overrides_N41_N42.plist&lt;/li&gt;
+&lt;li&gt;overrides_N41_N42.pri&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;これらを削除する。これらファイルはLTEのためのものであり、これらを削除することで設定が書き換わることがなくなるので圏外病が発生しなくなる(LTEに必要なものを削除するのでLTEは使用できなくなる)。&lt;/p&gt;
+
+&lt;p&gt;また、このディレクトリにあるcarrier.plistを使用するキャリアに合わせて適宜変更しておくと便利。apnsの項目にAPNの情報を追加したり、type-maskを変更しておくとテザリングが使用できるようになったりする。&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
