@@ -42,6 +42,66 @@
   <div class="container">
     
     <article>
+      <h2 class="subtitle is-6">March 21, 2017</h2>
+      <h1 class="title"><a href="https://antimon.xyz/2017/03/21/attacker/">侵入してきた攻撃者の動向</a></h1>
+      
+        <div class="tags">
+    
+        <a class="button is-link" href="/tags/security">security</a>
+    
+</div>
+
+      
+      <div class="content">
+        <p>前回の日本のIPアドレスからの攻撃元一覧表における23と24について、攻撃者の動向を分析してみる。</p>
+
+<table>
+<thead>
+<tr>
+<th>No.</th>
+<th>IPアドレス</th>
+<th>クライアント情報</th>
+<th>回線</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>23</td>
+<td>60.128.11.XXX</td>
+<td>SSH-2.0-PuTTY_Release_0.63</td>
+<td>GIGAINFRA Softbank BB Corp.</td>
+</tr>
+
+<tr>
+<td>24</td>
+<td>183.77.227.XX</td>
+<td>SSH-2.0-PuTTY_Release_0.67</td>
+<td>ASAHI-NET Asahi Net</td>
+</tr>
+</tbody>
+</table>
+
+<p>これら2つのクライアント情報を確認するとPuTTYを使用していることがわかる。少なくともこれら2つの攻撃者はWindowsマシンを使用していると推測できる。</p>
+
+<p>まず23の攻撃者について、この攻撃者はユーザ名:test、パスワード:testを使用して侵入し、ポートフォワードでIPアドレスを確認するサイトに接続している。その後、セッションは切断となっているため、環境が使用できるかどうかのチェックが目的だったのかもしくは間違えて接続しただけなのか、これだけでは不明である。</p>
+
+<p>しかし、このIPアドレス等から調べてみると、この攻撃者はネットワークやソーシャルゲーム、チート等に興味があるようである。そのことから、踏み台を探しているのではないかという推測もできる。</p>
+
+<p>次に24の攻撃者について、この攻撃者はユーザ名:root、パスワード:passwordを使用して侵入している。その後、wgetコマンドを使用して次のURLからIRCのリレーサーバであるpsyBNCをダウンロードし展開している。</p>
+
+<p>http[:]//psybnc[.]at/download/beta/psyBNC-2.3.2-9.tar.gz</p>
+
+<p>しかし、展開した後ダウンロードしたファイルおよび展開したディレクトリを削除している。問題なくダウンロードできたかを確認しているのではないかと推測する。その後、コマンド履歴を削除しホスト名を<strong>muie.com</strong>に変更しようとするが、コマンドの入力ミス(hostnameをhistnameとtypoしている?)で変更できず、接続を切っている。</p>
+
+<p><img src="/images/attacker_24_console.gif" alt="24の攻撃者のコマンド入力" /></p>
+
+<p>引き続き攻撃を観測し、動きがあればまとめてみようと思う。</p>
+
+      </div>
+    </article>
+    
+    <article>
       <h2 class="subtitle is-6">March 18, 2017</h2>
       <h1 class="title"><a href="https://antimon.xyz/2017/03/18/mirai/">日本におけるMirai BotNet</a></h1>
       

@@ -7,8 +7,61 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>&amp;copy; 2014-2017 magiauk.</copyright>
-    <lastBuildDate>Sat, 18 Mar 2017 14:58:02 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 21 Mar 2017 12:37:54 +0900</lastBuildDate>
     <atom:link href="https://antimon.xyz/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>侵入してきた攻撃者の動向</title>
+      <link>https://antimon.xyz/2017/03/21/attacker/</link>
+      <pubDate>Tue, 21 Mar 2017 12:37:54 +0900</pubDate>
+      
+      <guid>https://antimon.xyz/2017/03/21/attacker/</guid>
+      <description>&lt;p&gt;前回の日本のIPアドレスからの攻撃元一覧表における23と24について、攻撃者の動向を分析してみる。&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;No.&lt;/th&gt;
+&lt;th&gt;IPアドレス&lt;/th&gt;
+&lt;th&gt;クライアント情報&lt;/th&gt;
+&lt;th&gt;回線&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;23&lt;/td&gt;
+&lt;td&gt;60.128.11.XXX&lt;/td&gt;
+&lt;td&gt;SSH-2.0-PuTTY_Release_0.63&lt;/td&gt;
+&lt;td&gt;GIGAINFRA Softbank BB Corp.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;24&lt;/td&gt;
+&lt;td&gt;183.77.227.XX&lt;/td&gt;
+&lt;td&gt;SSH-2.0-PuTTY_Release_0.67&lt;/td&gt;
+&lt;td&gt;ASAHI-NET Asahi Net&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;これら2つのクライアント情報を確認するとPuTTYを使用していることがわかる。少なくともこれら2つの攻撃者はWindowsマシンを使用していると推測できる。&lt;/p&gt;
+
+&lt;p&gt;まず23の攻撃者について、この攻撃者はユーザ名:test、パスワード:testを使用して侵入し、ポートフォワードでIPアドレスを確認するサイトに接続している。その後、セッションは切断となっているため、環境が使用できるかどうかのチェックが目的だったのかもしくは間違えて接続しただけなのか、これだけでは不明である。&lt;/p&gt;
+
+&lt;p&gt;しかし、このIPアドレス等から調べてみると、この攻撃者はネットワークやソーシャルゲーム、チート等に興味があるようである。そのことから、踏み台を探しているのではないかという推測もできる。&lt;/p&gt;
+
+&lt;p&gt;次に24の攻撃者について、この攻撃者はユーザ名:root、パスワード:passwordを使用して侵入している。その後、wgetコマンドを使用して次のURLからIRCのリレーサーバであるpsyBNCをダウンロードし展開している。&lt;/p&gt;
+
+&lt;p&gt;http[:]//psybnc[.]at/download/beta/psyBNC-2.3.2-9.tar.gz&lt;/p&gt;
+
+&lt;p&gt;しかし、展開した後ダウンロードしたファイルおよび展開したディレクトリを削除している。問題なくダウンロードできたかを確認しているのではないかと推測する。その後、コマンド履歴を削除しホスト名を&lt;strong&gt;muie.com&lt;/strong&gt;に変更しようとするが、コマンドの入力ミス(hostnameをhistnameとtypoしている?)で変更できず、接続を切っている。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://antimon.xyz/images/attacker_24_console.gif&#34; alt=&#34;24の攻撃者のコマンド入力&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;引き続き攻撃を観測し、動きがあればまとめてみようと思う。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>日本におけるMirai BotNet</title>
