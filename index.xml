@@ -16,11 +16,9 @@
       <pubDate>Thu, 23 Mar 2017 17:45:46 +0900</pubDate>
       
       <guid>https://antimon.xyz/2017/03/23/mirai-device/</guid>
-      <description>&lt;p&gt;前回の「&lt;a href=&#34;https://antimon.xyz/2017/03/18/mirai/&#34;&gt;日本におけるMirai BotNet&lt;/a&gt;」で紹介した攻撃元について、更に突っ込んだ調査を行ってみた。&lt;/p&gt;
+      <description>&lt;p&gt;&lt;img src=&#34;https://antimon.xyz/images/mirai-device.png&#34; alt=&#34;攻撃を仕掛けてきたMirai BotNetに感染した端末&#34; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://antimon.xyz/images/mirai-device.png&#34; alt=&#34;攻撃を仕掛けてきたMirai BotNetに感染した端末&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;攻撃元端末の情報は次のとおりである。&lt;/p&gt;
+&lt;p&gt;前回の「&lt;a href=&#34;https://antimon.xyz/2017/03/18/mirai/&#34;&gt;日本におけるMirai BotNet&lt;/a&gt;」で紹介した攻撃元について、更に突っ込んだ調査を行ってみた。攻撃元端末の情報は次のとおりである。&lt;/p&gt;
 
 &lt;table&gt;
 &lt;thead&gt;
