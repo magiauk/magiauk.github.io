@@ -10,6 +10,171 @@
     <atom:link href="https://antimon.xyz/tags/security/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>攻撃を仕掛けてきたMirai BotNetに感染した端末</title>
+      <link>https://antimon.xyz/2017/03/23/mirai-device/</link>
+      <pubDate>Thu, 23 Mar 2017 17:45:46 +0900</pubDate>
+      
+      <guid>https://antimon.xyz/2017/03/23/mirai-device/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://antimon.xyz/images/mirai-device.png&#34; alt=&#34;攻撃を仕掛けてきたMirai BotNetに感染した端末&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;前回の「&lt;a href=&#34;https://antimon.xyz/2017/03/18/mirai/&#34;&gt;日本におけるMirai BotNet&lt;/a&gt;」で紹介した攻撃元について、更に突っ込んだ調査を行ってみた。攻撃元端末の情報は次のとおりである。&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;No.&lt;/th&gt;
+&lt;th&gt;IPアドレス&lt;/th&gt;
+&lt;th&gt;端末&lt;/th&gt;
+&lt;th&gt;TCP/UDPポート&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;106.166.193.XX&lt;/td&gt;
+&lt;td&gt;QNAP NAS&lt;/td&gt;
+&lt;td&gt;21 80 443&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;111.100.153.XX&lt;/td&gt;
+&lt;td&gt;BitTorrent使用機器&lt;/td&gt;
+&lt;td&gt;6889&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;113.158.61.XXX&lt;/td&gt;
+&lt;td&gt;QNAP NAS&lt;/td&gt;
+&lt;td&gt;21 22 80 443 873 1723 8080 8081&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;120.51.100.XX&lt;/td&gt;
+&lt;td&gt;ELECOM製機器&lt;/td&gt;
+&lt;td&gt;53 7777 8080&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;td&gt;183.180.76.XXX&lt;/td&gt;
+&lt;td&gt;ELECOM製機器&lt;/td&gt;
+&lt;td&gt;53 8080&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;7&lt;/td&gt;
+&lt;td&gt;202.215.132.XXX&lt;/td&gt;
+&lt;td&gt;QNAP NAS&lt;/td&gt;
+&lt;td&gt;80 443 1723&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;8&lt;/td&gt;
+&lt;td&gt;153.145.139.XX&lt;/td&gt;
+&lt;td&gt;ELECOM製機器&lt;/td&gt;
+&lt;td&gt;53 7777 8080&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;10&lt;/td&gt;
+&lt;td&gt;153.231.161.XX&lt;/td&gt;
+&lt;td&gt;ELECOM製機器&lt;/td&gt;
+&lt;td&gt;53 7777 8080&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;12&lt;/td&gt;
+&lt;td&gt;54.238.249.XXX&lt;/td&gt;
+&lt;td&gt;AWS EC2 Ubuntu 14.04&lt;/td&gt;
+&lt;td&gt;22 80&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;13&lt;/td&gt;
+&lt;td&gt;119.229.121.XX&lt;/td&gt;
+&lt;td&gt;QNAP NAS&lt;/td&gt;
+&lt;td&gt;21 22&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;14&lt;/td&gt;
+&lt;td&gt;218.42.252.XXX&lt;/td&gt;
+&lt;td&gt;IP Camera&lt;/td&gt;
+&lt;td&gt;80&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;17&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;27.54.125.XXX&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;QNAP NAS&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;21 22 80 137 445 631 873 3310 5353 8080 8081 9000 38324 40227 49152 49153&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;18&lt;/td&gt;
+&lt;td&gt;126.114.210.XX&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;80 554 1900 49152&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;21&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;202.143.199.XXX&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;監視装置&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;21 23&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;22&lt;/td&gt;
+&lt;td&gt;222.231.84.XXX&lt;/td&gt;
+&lt;td&gt;QNAP NAS&lt;/td&gt;
+&lt;td&gt;53&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;QNAP製のNASおよびELECOM製機器が多い。この中から17および21をもう少し掘り下げてみる。&lt;/p&gt;
+
+&lt;p&gt;17の27.54.125.XXXについて、端末はQNAP NAPであり外部に公開しているポートが多いことが特徴である。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://antimon.xyz/images/mirai-device_qnap.png&#34; alt=&#34;QNAP NASログイン画面&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;445/tcpも空いており、SMBで共有しているディスクが外部にも公開されているようである。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Sharename       Type      Comment
+---------       ----      -------
+IPC$            IPC       IPC Service (NAS Server)
+USBDisk1        Disk      USB storage share
+home            Disk      Home
+バックアップ      Disk      ＰＣのバックアップ
+SCAN            Disk      
+SHARE           Disk      
+Network Recycle Bin 1 Disk      [RAID5 Disk Volume: Drive 1 2 3 4]
+
+Server               Comment
+---------            -------
+
+Workgroup            Master
+---------            -------
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;今時外部に向けてこれだけ公開されているのは珍しくわざとらしい気もするが、Miraiに感染していると疑われる端末でもあり、このNASを使用している人物が外部に公開する設定にしていると判断するのが妥当である。&lt;/p&gt;
+
+&lt;p&gt;つぎに21の202.143.199.XXXついてだが、感染していると疑われる端末は監視装置である。端末としてはCATVで使用される信号を監視する装置なのだが、おそらく、外部接続のために通信関連のモジュールとしてARMベースのLinuxが組み込まれているようである。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://antimon.xyz/images/mirai-device_catv.png&#34; alt=&#34;ARMベースのLinux&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;そのモジュールに感染しているのではないかと考えられる。このモジュールに関してはベースとなるものがIoT機器プラットフォームとして販売されており、また技術情報も公開されている。&lt;/p&gt;
+
+&lt;p&gt;ちなみに、この感染している端末が使用しているLinuxカーネルのバージョンは2.6.26である。ということはCVE-2016-5195を始めとした脆弱性の影響を受ける可能性もあり、危険な匂いがする。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>侵入してきた攻撃者の動向</title>
       <link>https://antimon.xyz/2017/03/21/attacker/</link>
       <pubDate>Tue, 21 Mar 2017 12:37:54 +0900</pubDate>
